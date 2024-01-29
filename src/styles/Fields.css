@@ -1,0 +1,46 @@
+.box-field {
+    width: 279px;
+    height: 76px;
+    top: 261px;
+    left: 452px;
+    border: 1px;
+
+}
+
+.box-field .box-text {
+    width: 62px;
+    height: 20px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.box-field .input-field {
+    border: 1px solid #CCCCCC;
+    width: 100%;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+
+
+}
+
+.box-field .select-field {
+    border: 1px solid #CCCCCC;
+    width: 100%;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+}

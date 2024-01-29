@@ -1,0 +1,10 @@
+.btn-convert {
+    width: 42px;
+    height: 42px;  
+    border: 1px solid #177FE5;
+    border-radius: 100%;
+    background-image: url("../assets/Button.png");
+    cursor: pointer;
+
+
+}
