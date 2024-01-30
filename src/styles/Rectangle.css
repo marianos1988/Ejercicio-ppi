@@ -25,7 +25,10 @@
 
   @media (min-width: 375px) AND (max-width: 450px) {
     .rectangle .text-rectangle {
-      width: 275px;
-    
+      min-width: 275px;
+      
+    }
+    .rectangle .text-rectangle {
+      text-align:inherit;
     }
   }

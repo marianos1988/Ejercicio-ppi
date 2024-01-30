@@ -1,4 +1,5 @@
 header {
+  display: flex;
     width: 100%;
     height: 60px;
     background: #0E1342;
@@ -16,7 +17,7 @@ header {
     letter-spacing: 0em;
     text-align: left;
     color: #fff;
-    width: 709.97px;
+    min-width:min-content;
     height: 20px;
     transform: translate(54.61px,20px);
   }

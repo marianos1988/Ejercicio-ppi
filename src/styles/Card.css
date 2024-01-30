@@ -21,7 +21,7 @@
     box-shadow: 0px 5px 5px 0px #0000001A;
 
 
-}
+} 
 
 .card .rectangle-card .container-fields {
     display: flex;
@@ -43,7 +43,15 @@
         display: flex;
         flex-wrap: nowrap;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .card .rectangle-card .container-result-display {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
