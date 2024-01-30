@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import "../styles/Card.css"
 import { Button } from "./Button"
 import { Desc } from "./Desc"
@@ -11,8 +11,10 @@ type Props = {}
 
 export const Card = (props: Props) => {
 
-  const { form, handleChangeInput, handleChangeSelect} = useCalculator();
+  const { form, handleChangeInput, handleChangeSelect, getFetchCurrencies} = useCalculator();
   
+  useEffect(()=>{getFetchCurrencies()},[]);
+
   return (
     <div className="card"> 
       <div className="rectangle-card">
