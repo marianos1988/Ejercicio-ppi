@@ -1,0 +1,53 @@
+.container-desc-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.container-desc-date .desc-date {
+    width: 393px;
+
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.container-desc-date .desc-date p {
+    display: inline;
+    text-decoration: underline;
+}
+
+@media (min-width:375px) AND (max-width:1200px) {
+    .container-desc-date {
+        margin-top: -30px;
+    }
+
+
+    .container-desc-date .desc-date {
+        font-family: Inter;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 23px;
+        letter-spacing: 0em;
+        text-align: left;
+
+        font-family: Inter;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 23px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
+}

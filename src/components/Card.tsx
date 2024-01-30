@@ -1,5 +1,7 @@
 import "../styles/Card.css"
 import { Button } from "./Button"
+import { Desc } from "./Desc"
+import { DescDate } from "./DescDate"
 import { InputField } from "./InputField"
 import { ResultDisplay } from "./ResultDisplay"
 import { SelectField } from "./SelectField"
@@ -27,6 +29,8 @@ export const Card = (props: Props) => {
           textTo={"Dolar"}
           valueTo={1.0627}
         />
+        <Desc />
+        <DescDate />
 
       </div>
     </div>

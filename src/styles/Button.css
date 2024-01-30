@@ -5,6 +5,11 @@
     border-radius: 100%;
     background-image: url("../assets/Button.png");
     cursor: pointer;
+    transform: translateY(-5px);
+}
 
-
+@media (min-width:375px) AND (max-width:1200px) {
+    .btn-convert {
+        transform: translateY(0px);
+    }
 }

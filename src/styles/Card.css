@@ -1,4 +1,5 @@
 .card {
+
     z-index: 999;
     margin-top: -90px;
     width: 100%;
@@ -12,6 +13,7 @@
 }
 
 .rectangle-card {
+    
     width: 80%;
     height: 402px;
     top: 228px;
