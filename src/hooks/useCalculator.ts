@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setAllCurrencies } from "../reducers/CurrenciesSlice";
+import { useUtils } from "./useUtils";
 
 type InitialState = {
   amount: string,
@@ -11,11 +12,12 @@ type InitialState = {
 export const useCalculator = () => {
 
   const dispatch =  useDispatch();
-  // const { email, fullName } = useSelector((state:user) => state.user);
+  const { rightDate } = useUtils();
+
 
   const initialState:InitialState = {
     amount: "1.00",
-    from: "USD - US Dolar", // cambiar con el fetch recibido
+    from: "USD - US Dolar", 
     to: "EUR - Euro"
   }
 
@@ -24,7 +26,12 @@ export const useCalculator = () => {
     const JSONData = await fetch("https://api.vatcomply.com/currencies");
     const currencies = await JSONData.json();
     dispatch(setAllCurrencies(currencies));
-    console.log(currencies);
+  }
+
+  const getFetchRates = async (base:string) => {
+    const JSONData = await fetch(`https://api.vatcomply.com/rates?date=${rightDate()}&base=${base}`);
+    const rates = await JSONData.json();
+    console.log(rates)
   }
 
   const [form, setForm] = useState(initialState)
@@ -61,7 +68,8 @@ export const useCalculator = () => {
     form,
     handleChangeInput,
     handleChangeSelect,
-    getFetchCurrencies
+    getFetchCurrencies,
+    getFetchRates
   }
 }
 

@@ -10,7 +10,12 @@
     }
   | {}
  const initialState:ListCurrencies= {
-  currencies: {}
+  currencies: {
+    USD: {
+      name: "",
+      
+    }
+  }
  }
 
 

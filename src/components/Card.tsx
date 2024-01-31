@@ -5,15 +5,23 @@ import { Desc } from "./Desc"
 import { DescDate } from "./DescDate"
 import { InputField } from "./InputField"
 import { ResultDisplay } from "./ResultDisplay"
-import { SelectField } from "./SelectField"
-import { useCalculator } from "../hooks/useCalculator"
+import { SelectFieldFrom } from "./SelectFieldFrom"
+import { useCalculator } from "../hooks/useCalculator" 
+import { useSelector } from "react-redux"
+import { SelectFieldTo } from "./SelectFieldTo"
+
+
 type Props = {}
 
 export const Card = (props: Props) => {
 
-  const { form, handleChangeInput, handleChangeSelect, getFetchCurrencies} = useCalculator();
-  
+  const { form, handleChangeInput, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
+
   useEffect(()=>{getFetchCurrencies()},[]);
+  getFetchRates("USD");
+  const { currencies } = useSelector((state:any) => state.currencies);
+
+
 
   return (
     <div className="card"> 
@@ -24,18 +32,20 @@ export const Card = (props: Props) => {
             inputValue = {form.amount}
             outputValue={handleChangeInput}
           />
-          <SelectField 
+          <SelectFieldFrom
             text="From"
             inputValue = {form.from}
             outputValue={(e)=>handleChangeSelect(e,"from")}
+            currencies= {currencies}
           />
           <Button
           form= {form}
           ></Button>
-          <SelectField 
+          <SelectFieldTo 
             text="To"
             inputValue={form.to}
             outputValue={(e)=>handleChangeSelect(e,"to")}
+            currencies= {currencies}
           />
         </div>
         <ResultDisplay 
