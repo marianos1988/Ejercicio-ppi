@@ -9,6 +9,8 @@
       }
     }
   | {}
+
+
  const initialState:ListCurrencies= {
   currencies: {
     USD: {
@@ -17,7 +19,6 @@
     }
   }
  }
-
 
  const CurrenciesSlice = createSlice({
     name: "currencies",

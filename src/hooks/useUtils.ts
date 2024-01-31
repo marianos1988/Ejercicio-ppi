@@ -2,7 +2,7 @@
 
 export const useUtils = () => {
 
-  const rightDate = () => {
+  const rightDate = (date:number,month:number, year:number) => {
 
     const addZero = (number:number) => {
       if(number < 10) {
@@ -10,9 +10,10 @@ export const useUtils = () => {
       }
       return number;
     }
-    const todayDate = new Date();
-    const rightDate = `${todayDate.getFullYear()}-${addZero(todayDate.getMonth()+1)}-${addZero(todayDate.getDate())}`;
-  
+    const rightDate = `${year}-${addZero(month)}-${addZero(date)}`;
+    // const todayDate = new Date();
+    // const rightDate = `${todayDate.getFullYear()}-${addZero(todayDate.getMonth()+1)}-${addZero(todayDate.getDate())}`;
+    
     return rightDate;
 
   }

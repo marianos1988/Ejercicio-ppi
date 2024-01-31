@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useEffect } from "react"
 import "../styles/Card.css"
 import { Button } from "./Button"
 import { Desc } from "./Desc"
@@ -17,8 +17,13 @@ export const Card = (props: Props) => {
 
   const { form, handleChangeInput, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
 
-  useEffect(()=>{getFetchCurrencies()},[]);
-  getFetchRates("USD");
+  useEffect(()=>{
+    getFetchCurrencies();
+    getFetchRates("USD","from");
+    getFetchRates("EUR","to");
+  },[]);
+
+
   const { currencies } = useSelector((state:any) => state.currencies);
 
 

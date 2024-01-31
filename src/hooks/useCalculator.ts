@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setAllCurrencies } from "../reducers/CurrenciesSlice";
+import { setRatesFrom, setRatesTo } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
 type InitialState = {
@@ -23,15 +24,36 @@ export const useCalculator = () => {
 
   const getFetchCurrencies = async () => {
 
-    const JSONData = await fetch("https://api.vatcomply.com/currencies");
-    const currencies = await JSONData.json();
-    dispatch(setAllCurrencies(currencies));
+    try {
+      const JSONData = await fetch("https://api.vatcomply.com/currencies");
+      const currencies = await JSONData.json();
+      dispatch(setAllCurrencies(currencies));
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
-  const getFetchRates = async (base:string) => {
-    const JSONData = await fetch(`https://api.vatcomply.com/rates?date=${rightDate()}&base=${base}`);
-    const rates = await JSONData.json();
-    console.log(rates)
+  const getFetchRates = async (base:string,fromORTo:string) => {
+
+    try {
+      const todayDate = new Date();
+      const JSONData = await fetch(`https://api.vatcomply.com/rates?date=${rightDate(todayDate.getDate(),(todayDate.getMonth()+1),todayDate.getFullYear())}&base=${base}`);
+      const rates = await JSONData.json();
+      if(fromORTo === "from") {
+        dispatch(setRatesFrom(rates));
+      }
+      else if(fromORTo === "to") {
+        dispatch(setRatesTo(rates));
+      }
+
+    } 
+    catch (e) {
+      console.log(e)
+    }
+
+    
+
   }
 
   const [form, setForm] = useState(initialState)
