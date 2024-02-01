@@ -18,7 +18,6 @@ type Currencie = {
 export const SelectFieldTo = ({ text, inputValue, outputValue, currencies }: Props) => {
 
 const handleChange = (e:any) => {
-
   return outputValue(e.target.value)
 } 
 

@@ -21,10 +21,12 @@ export const Card = (props: Props) => {
     getFetchCurrencies();
     getFetchRates("USD");
 
+
   },[]);
 
 
   const { listCurrencies } = useSelector((state:any) => state.currencies);
+  const { ratesFrom } = useSelector((state:any) => state.rates);
 
 
   return (
@@ -60,7 +62,10 @@ export const Card = (props: Props) => {
           valueTo={1.0627}
         />
         <Desc />
-        <DescDate />
+        <DescDate
+          date= {ratesFrom.date}
+          time= {new Date()}
+        />
 
       </div>
     </div>
