@@ -19,29 +19,29 @@ export const Card = (props: Props) => {
 
   useEffect(()=>{
     getFetchCurrencies();
-    getFetchRates("USD","from");
-    getFetchRates("EUR","to");
+    getFetchRates("USD");
+
   },[]);
 
 
-  const { currencies } = useSelector((state:any) => state.currencies);
-
+  const { listCurrencies } = useSelector((state:any) => state.currencies);
 
 
   return (
     <div className="card"> 
       <div className="rectangle-card">
         <div className="container-fields">
-          <InputField 
+          <InputField
             text="Amount"
             inputValue = {form.amount}
             outputValue={handleChangeInput}
+
           />
           <SelectFieldFrom
             text="From"
             inputValue = {form.from}
             outputValue={(e)=>handleChangeSelect(e,"from")}
-            currencies= {currencies}
+            currencies= {listCurrencies.orderFirstDollar}
           />
           <Button
           form= {form}
@@ -50,12 +50,12 @@ export const Card = (props: Props) => {
             text="To"
             inputValue={form.to}
             outputValue={(e)=>handleChangeSelect(e,"to")}
-            currencies= {currencies}
+            currencies= {listCurrencies.orderFirstEuro}
           />
         </div>
         <ResultDisplay 
           textFrom={"Euro"}
-          valueFrom={1.00}
+          valueFrom={form.amount}
           textTo={"Dolar"}
           valueTo={1.0627}
         />

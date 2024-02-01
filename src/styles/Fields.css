@@ -56,3 +56,14 @@
     text-align: left;
     color: #000000;
 }
+
+.box-field .validate-display {
+    display: none;
+    color: red;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+.box-field .error-active {
+    display: inherit;
+}

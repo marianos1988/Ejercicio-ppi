@@ -2,34 +2,61 @@
 
  type ListCurrencies = {
 
-    currencies: {
+  // listCurrencies: {
+  //   orderFirstDollar: {
+  //     currencie: string,
+  //     properties: {
+  //       name: string,
+  //       symbol:string
+  //     }
+  //   }[],
+  //   orderFirstEuro: {
+  //     currencie: string,
+  //     properties: {
+  //       name: string,
+  //       symbol:string
+  //     }
+  //   }[]
+  // }
 
-        name:string,
-        symbol: string
-      }
     }
-  | {}
 
 
  const initialState:ListCurrencies= {
-  currencies: {
-    USD: {
-      name: "",
-      
-    }
+  listCurrencies: {
+    orderFirstDollar: [{
+      currencie: "",
+      properties: {
+        name: "",
+        symbol:"",
+      }
+    }],
+    orderFirstEuro:[{
+      currencie: "",
+      properties: {
+        name: "",
+        symbol:"",
+      }
+    }]
   }
  }
+
 
  const CurrenciesSlice = createSlice({
     name: "currencies",
     initialState: initialState,
     reducers: {
       setAllCurrencies: (state:any,action) => {
-        state.currencies = action.payload;
-      }
+        state.listCurrencies = action.payload;
+
+
+      },
+
+
     } 
  }); 
 
- export const { setAllCurrencies } = CurrenciesSlice.actions;
+ export const { setAllCurrencies} = CurrenciesSlice.actions;
 
 export default CurrenciesSlice.reducer; 
+

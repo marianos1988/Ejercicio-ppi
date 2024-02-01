@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setAllCurrencies } from "../reducers/CurrenciesSlice";
-import { setRatesFrom, setRatesTo } from "../reducers/RatesSlice";
+import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
 type InitialState = {
-  amount: string,
+  amount: number | string,
   from: string,
   to: string
 }
@@ -22,34 +22,39 @@ export const useCalculator = () => {
     to: "EUR - Euro"
   }
 
+  const  {orderFirstDollar, orderFirstEuro} = useUtils();
+
   const getFetchCurrencies = async () => {
 
     try {
       const JSONData = await fetch("https://api.vatcomply.com/currencies");
       const currencies = await JSONData.json();
-      dispatch(setAllCurrencies(currencies));
+      const arrayCurrencies = Object.entries(currencies).map(([currencie, properties]) => ({ currencie, properties }));
+
+      const listCurrencies ={
+        orderFirstDollar : orderFirstDollar(arrayCurrencies),
+        orderFirstEuro: orderFirstEuro(arrayCurrencies)
+      } 
+
+      dispatch(setAllCurrencies(listCurrencies));
+
+
     }
     catch (e) {
       console.log(e);
     }
   }
 
-  const getFetchRates = async (base:string,fromORTo:string) => {
+  const getFetchRates = async (base:string) => {
 
     try {
       const todayDate = new Date();
       const JSONData = await fetch(`https://api.vatcomply.com/rates?date=${rightDate(todayDate.getDate(),(todayDate.getMonth()+1),todayDate.getFullYear())}&base=${base}`);
       const rates = await JSONData.json();
-      if(fromORTo === "from") {
         dispatch(setRatesFrom(rates));
-      }
-      else if(fromORTo === "to") {
-        dispatch(setRatesTo(rates));
-      }
-
     } 
     catch (e) {
-      console.log(e)
+      console.log(e);
     }
 
     
@@ -58,7 +63,7 @@ export const useCalculator = () => {
 
   const [form, setForm] = useState(initialState)
 
-  const handleChangeInput = (value:string) => {
+  const handleChangeInput = (value:number) => {
     setForm({
       amount: value,
       from: form.from,

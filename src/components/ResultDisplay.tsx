@@ -1,7 +1,7 @@
 import "../styles/ResultDisplay.css"
 
 type Props = {
-  valueFrom: number,
+  valueFrom: number | string,
   textFrom: string,
   valueTo: number,
   textTo: string

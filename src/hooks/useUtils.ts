@@ -1,4 +1,11 @@
 
+type Currencies = {
+  currencie: string,
+  properties: {
+    name: string,
+    symbol: string
+  }[]
+}
 
 export const useUtils = () => {
 
@@ -11,14 +18,57 @@ export const useUtils = () => {
       return number;
     }
     const rightDate = `${year}-${addZero(month)}-${addZero(date)}`;
-    // const todayDate = new Date();
-    // const rightDate = `${todayDate.getFullYear()}-${addZero(todayDate.getMonth()+1)}-${addZero(todayDate.getDate())}`;
     
     return rightDate;
 
   }
 
+const  validateOnlyNumbers= (num:any) => {
+  
+    for(let digit in num){
+        
+        if((num[digit] >= 0) && (num[digit] <= 9) || num === ",") {
+            return false;
+        }
+        else {
+
+          return true;
+        }
+    }
+  }
+
+  const orderFirstDollar = (currencies:any)=> {
+    let newListCurrencies = [];
+    const firstCurrencie = currencies.filter((currencie: { currencie: string })=>currencie.currencie === "USD");
+    newListCurrencies.push(firstCurrencie[0]);
+    currencies.forEach((currencie: { currencie: string })=>{
+      if(currencie.currencie !== "USD") {
+        newListCurrencies.push(currencie);
+      }
+    });
+    
+    return newListCurrencies;
+  }
+
+  const orderFirstEuro = (currencies:any)=> {
+    let newListCurrencies = [];
+    const firstCurrencie = currencies.filter((currencie: { currencie: string })=>currencie.currencie === "EUR");
+    newListCurrencies.push(firstCurrencie[0]);
+    currencies.forEach((currencie: { currencie: string })=>{
+      if(currencie.currencie !== "EUR") {
+        newListCurrencies.push(currencie);
+      }
+    });
+    
+    return newListCurrencies;
+  }
+
+
   return {
-    rightDate
+    rightDate,
+    validateOnlyNumbers,
+    orderFirstDollar,
+    orderFirstEuro
+
   }
 }
