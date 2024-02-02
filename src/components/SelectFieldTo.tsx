@@ -1,10 +1,12 @@
+
 import "../styles/Fields.css"
 
 type Props = {
   text: string
-  inputValue: string,
+  inputValue: any,
   outputValue: (e:string) => void
-  currencies: any
+  currencies: any,
+  outputCurrencie: any
 }
 
 type Currencie = {
@@ -15,10 +17,18 @@ type Currencie = {
   }
 }
 
-export const SelectFieldTo = ({ text, inputValue, outputValue, currencies }: Props) => {
+export const SelectFieldTo = ({ text, inputValue, outputValue, currencies, outputCurrencie }: Props) => {
+  
 
 const handleChange = (e:any) => {
-  return outputValue(e.target.value)
+  outputCurrencie(e.target.value)
+  for(let ele in inputValue) {
+    if(inputValue[ele].currencie === e.target.value) {
+
+      outputValue(inputValue[ele].rate);
+    }
+  }
+
 } 
 
   return (

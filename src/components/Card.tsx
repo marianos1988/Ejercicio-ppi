@@ -11,11 +11,9 @@ import { useSelector } from "react-redux"
 import { SelectFieldTo } from "./SelectFieldTo"
 
 
-type Props = {}
+export const Card = () => {
 
-export const Card = (props: Props) => {
-
-  const { form, handleChangeInput, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
+  const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
 
   useEffect(()=>{
     getFetchCurrencies();
@@ -50,16 +48,17 @@ export const Card = (props: Props) => {
           ></Button>
           <SelectFieldTo 
             text="To"
-            inputValue={form.to}
+            inputValue={ratesFrom.rates}
             outputValue={(e)=>handleChangeSelect(e,"to")}
+            outputCurrencie = {(e: string)=>{handleChangeSelectTo(e,"to")}}
             currencies= {listCurrencies.orderFirstEuro}
           />
         </div>
         <ResultDisplay 
-          textFrom={"Euro"}
+          textFrom={form.from}
           valueFrom={form.amount}
-          textTo={"Dolar"}
-          valueTo={1.0627}
+          textTo={form.to}
+          valueTo={form.totalTo}
         />
         <Desc />
         <DescDate

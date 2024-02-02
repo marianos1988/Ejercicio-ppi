@@ -9,13 +9,13 @@
 
 .value-display {
     width: 300px;
-    height: 58px;
+    height: 66px;
 
 }
 
 .value-display p {
     font-family: Inter;
-    font-size:28px;
+    font-size:26px;
     font-weight: 600;
     line-height: 28px;
     letter-spacing: 0em;
@@ -26,11 +26,12 @@
 
 .container-result-display .reverse-value-display {
 
+    transform: translateY(36px);
     padding: 15px 0 0 31px;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
-    line-height: 36px;
+    line-height: 16px;
     letter-spacing: 0em;
     text-align: left;
     color: #757575;
@@ -51,7 +52,7 @@
         font-family: Inter;
         font-size: 24px;
         font-weight: 600;
-        line-height: 7px;
+        line-height: 17px;
         letter-spacing: 0em;
         text-align: left;
         margin-left: 15px;
@@ -245,5 +246,18 @@
 
         transform: translate(-63px, -38px);
     }
+}
+
+@media (max-width: 1200px) {
+    .container-result-display .reverse-value-display {
+        transform: translate(-61px,-32px);
+    }
+    .container-result-display .reverse-value-display p {
+        font-size: 15px;
+    }
+    .value-display {
+        transform:  translateY(-25px);
+    }
+
 }
 

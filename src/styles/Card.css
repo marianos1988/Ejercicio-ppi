@@ -37,6 +37,10 @@
 @media (min-width: 375px) AND (max-width: 460px) {
     .card {
         padding-top: 25px;
+
+    }
+    .card .rectangle-card {
+        padding-bottom: 35px;
     }
 }
 
