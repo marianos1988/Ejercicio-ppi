@@ -58,9 +58,21 @@
         margin-left: 15px;
 
     }
-    .container-result-display .reverse-value-display {
 
-        transform: translate(-64px, -43px);
+    .container-result-display .reverse-value-display {
+        transform: translate(-62px,-45px);
+    }
+    
+
+}
+
+@media (min-width: 461px) AND (max-width: 650px) {
+    .container-result-display .reverse-value-display {
+        transform: translate(0px,0px);
+    }
+
+    .container-result-display .reverse-value-display {
+        transform: translate(-62px,-45px);
     }
 }
 
@@ -82,9 +94,9 @@
 
     }
     .container-result-display .reverse-value-display {
-
-        transform: translate(-63px, -38px);
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 577px) AND (max-width:678px) {
@@ -104,10 +116,11 @@
         margin-left: 15px;
 
     }
-    .container-result-display .reverse-value-display {
 
-        transform: translate(-63px, -38px);
+    .container-result-display .reverse-value-display {
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 578px) AND (max-width:678px) {
@@ -127,10 +140,7 @@
         margin-left: 15px;
 
     }
-    .container-result-display .reverse-value-display {
 
-        transform: translate(-63px, -38px);
-    }
 }
 
 @media (min-width: 679px) AND (max-width:779px) {
@@ -150,10 +160,11 @@
         margin-left: 15px;
 
     }
-    .container-result-display .reverse-value-display {
 
-        transform: translate(-63px, -38px);
+    .container-result-display .reverse-value-display {
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 780px) AND (max-width:880px) {
@@ -174,9 +185,9 @@
 
     }
     .container-result-display .reverse-value-display {
-
-        transform: translate(-63px, -38px);
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 881px) AND (max-width:981px) {
@@ -196,10 +207,11 @@
         margin-left: 15px;
 
     }
-    .container-result-display .reverse-value-display {
 
-        transform: translate(-63px, -38px);
+    .container-result-display .reverse-value-display {
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 982px) AND (max-width:1050px) {
@@ -220,9 +232,9 @@
 
     }
     .container-result-display .reverse-value-display {
-
-        transform: translate(-63px, -38px);
+        transform: translate(-62px,-53px);
     }
+
 }
 
 @media (min-width: 1051px) AND (max-width:1200px) {
@@ -243,15 +255,12 @@
 
     }
     .container-result-display .reverse-value-display {
-
-        transform: translate(-63px, -38px);
+        transform: translate(-62px,-53px);
     }
 }
 
 @media (max-width: 1200px) {
-    .container-result-display .reverse-value-display {
-        transform: translate(-61px,-32px);
-    }
+
     .container-result-display .reverse-value-display p {
         font-size: 15px;
     }

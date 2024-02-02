@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCurrencies } from "../reducers/CurrenciesSlice";
+import { setAllCurrencies, setCurrenciesForChange } from "../reducers/CurrenciesSlice";
 import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
@@ -10,6 +10,11 @@ type InitialState = {
   to: string,
   totalTo: string
   total: number,
+  currencieFrom: string
+  currencieTo: string
+  currencieFromSimbol: string,
+  currencieToSimbol: string,
+
 
 }
 
@@ -28,7 +33,11 @@ export const useCalculator = () => {
     from: "USD - US Dolar",
     to: "EUR - Euro",
     totalTo: "0.9247272054743851",
-    total: 0
+    total: 0,
+    currencieFrom: "US Dolar",
+    currencieTo: "Euro",
+    currencieFromSimbol: "USD",
+    currencieToSimbol: "EUR"
   }
 
   const  {orderFirstDollar, orderFirstEuro} = useUtils();
@@ -48,14 +57,25 @@ export const useCalculator = () => {
 
 
       dispatch(setAllCurrencies(listCurrencies));
-      addTotal(form.amount,`${ratesFrom.rate[0].rate}`,`${listCurrencies.orderFirstDollar[0].currencie} - ${listCurrencies.orderFirstDollar[0].properties.name}`,`${listCurrencies.orderFirstEuro[0].currencie} - ${listCurrencies.orderFirstEuro[0].properties.name}`)
 
+
+      addTotal(form.amount,ratesFrom.rate[0].rate,`${listCurrencies.orderFirstDollar[0].currencie} - ${listCurrencies.orderFirstDollar[0].properties.name}`,`${listCurrencies.orderFirstEuro[0].currencie} - ${listCurrencies.orderFirstEuro[0].properties.name}`,listCurrencies.orderFirstDollar[0].properties.name,listCurrencies.orderFirstEuro[0].properties.name,listCurrencies.orderFirstDollar[0].currencie,listCurrencies.orderFirstEuro[0].currencie)
+
+      let change = {
+        fromName: listCurrencies.orderFirstDollar[0].properties.name,
+        toName: listCurrencies.orderFirstEuro[0].properties.name,
+        currenceFrom: listCurrencies.orderFirstDollar[0].currencie,
+        currencieTo: listCurrencies.orderFirstEuro[0].currencie,
+      }
+      dispatch(setCurrenciesForChange(change))
 
     }
     catch (e) {
       console.log(e);
     }
   }
+
+  
 
   const getFetchRates = async (base:string) => {
 
@@ -86,7 +106,8 @@ export const useCalculator = () => {
 
   const handleChangeInput = (value:string) => {
 
-    addTotal(value,form.totalTo,form.from,form.to)
+    addTotal(value,form.totalTo,form.from,form.to,form.currencieFrom,form.currencieTo,form.currencieFromSimbol,form.currencieToSimbol)
+    
 
   }
 
@@ -97,7 +118,8 @@ export const useCalculator = () => {
       listCurrencies.orderFirstDollar.forEach((currencie:any) => {
         
         if(value === currencie.currencie) {
-          addTotal(form.amount,form.totalTo,`${currencie.currencie} - ${currencie.properties.name}`,form.to)
+
+          addTotal(form.amount,form.totalTo,`${currencie.currencie} - ${currencie.properties.name}`,form.to,currencie.properties.name,form.currencieTo,value,form.currencieToSimbol)
 
         }
       })
@@ -107,7 +129,8 @@ export const useCalculator = () => {
             listCurrencies.orderFirstDollar.forEach((currencie:any) => {
         
         if(value === currencie.currencie) {
-          addTotal(form.amount,value,`${currencie.currencie} - ${currencie.properties.name}`,form.to)
+
+          addTotal(form.amount,value,`${currencie.currencie} - ${currencie.properties.name}`,form.to,form.currencieFrom,currencie.properties.name,form.currencieFromSimbol,value)
 
         }
       })
@@ -117,16 +140,16 @@ export const useCalculator = () => {
   const handleChangeSelectTo = (value:string,_fromOrTo: string) => {
 
 
-            listCurrencies.orderFirstEuro.forEach((currencie:any) => {
-        
-        if(value === currencie.currencie) {
-          addTotal(form.amount,form.totalTo,form.from,`${currencie.currencie} - ${currencie.properties.name}`)
-        }
-      })
+    listCurrencies.orderFirstEuro.forEach((currencie:any) => {
+    
+    if(value === currencie.currencie) {
+      addTotal(form.amount,form.totalTo,form.from,`${currencie.currencie} - ${currencie.properties.name}`,form.currencieFrom,currencie.properties.name,form.currencieFromSimbol,value)
+    }
+  })
 
   }
 
-  const addTotal = (amount:string, totalTo:string,from:string,to:string) => {
+  const addTotal = (amount:string, totalTo:string,from:string,to:string,currencieFrom:string,currencieTo:string,currencieFromSimbol:string,currencieToSimbol:string) => {
     let num1:number = parseFloat(amount);
     let num2:number= parseFloat(totalTo);
     let total:number= (num1*num2);
@@ -136,8 +159,21 @@ export const useCalculator = () => {
       from: from,
       to: to,
       totalTo: totalTo,
-      total: total
+      total: total,
+      currencieFrom: currencieFrom,
+      currencieTo: currencieTo,
+      currencieFromSimbol: currencieFromSimbol,
+      currencieToSimbol: currencieToSimbol
+
     })
+
+  }
+
+  const handleOnClick = async () => {
+    
+console.log(form.from);
+    
+    
   }
 
 
@@ -149,7 +185,8 @@ export const useCalculator = () => {
     handleChangeSelectTo,
     getFetchCurrencies,
     getFetchRates,
-    addTotal
+    addTotal,
+    handleOnClick
 
   }
 }

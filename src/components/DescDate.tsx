@@ -3,10 +3,12 @@ import "../styles/DescDate.css";
 
 type props = {
   date:string,
-  time: Date
+  time: Date,
+  currencieFrom: string,
+  currencieTo: string
 }
 
-export const DescDate = ({ date,time }:props) => {
+export const DescDate = ({ date,time,currencieFrom, currencieTo }:props) => {
 
   const { detectMonth } = useUtils();
   const h = time.getHours();
@@ -15,7 +17,7 @@ export const DescDate = ({ date,time }:props) => {
   return (
     <div className="container-desc-date">
       <div className="desc-date">
-        <p>Euro</p> to <p>US Dollar</p> conversion — Last updated {month} {date.slice(8,10)}, {date.slice(0,4)}, {h}:{m} UTC
+        <p>{currencieFrom}</p> to <p>{currencieTo}</p> conversion — Last updated {month} {date.slice(8,10)}, {date.slice(0,4)}, {h}:{m} UTC
       </div>
     </div>
   )

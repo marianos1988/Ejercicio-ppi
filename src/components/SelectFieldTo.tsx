@@ -18,14 +18,16 @@ type Currencie = {
 }
 
 export const SelectFieldTo = ({ text, inputValue, outputValue, currencies, outputCurrencie }: Props) => {
-  
+
 
 const handleChange = (e:any) => {
   outputCurrencie(e.target.value)
+
   for(let ele in inputValue) {
     if(inputValue[ele].currencie === e.target.value) {
-
+ 
       outputValue(inputValue[ele].rate);
+
     }
   }
 

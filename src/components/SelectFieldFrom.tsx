@@ -35,7 +35,7 @@ const handleChange = (e:any) => {
       <label className='box-text'>{text}</label>
       <select name="type-convertion" className="select-field" onChange={handleChange}>
         { 
-          (currencies.length ===0)
+          (currencies.length === 0)
             ? (<option value={""}>{"-----"}</option>)
             : (
               currencies.map((currencie:Currencie)=>(

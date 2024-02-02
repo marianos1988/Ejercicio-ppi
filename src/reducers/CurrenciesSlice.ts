@@ -37,7 +37,13 @@
         name: "",
         symbol:"",
       }
-    }]
+    }],
+    changeCurrencie: {
+      fromName: "",
+      toName: "",
+      currenceFrom: "",
+      currencieTo: ""
+    }
   }
  }
 
@@ -48,15 +54,27 @@
     reducers: {
       setAllCurrencies: (state:any,action) => {
         state.listCurrencies = action.payload;
-
-
       },
+      setCurrenciesForChange: (state:any,action) => {
+        state.listCurrencies.changeCurrencie = action.payload
+      },
+      changeCurrencies: (state:any) => {
+        let change = state.listCurrencies.changeCurrencie
+        change = {
+          fromName: change.toName,
+          toName: change.fromName,
+          currenceFrom: change.currenceTo,
+          currencieTo: change.currenceFrom
+        }
+        state.listCurrencies.changeCurrencie = change;
+      }
+
 
 
     } 
  }); 
 
- export const { setAllCurrencies} = CurrenciesSlice.actions;
+ export const { setAllCurrencies,setCurrenciesForChange, changeCurrencies } = CurrenciesSlice.actions;
 
 export default CurrenciesSlice.reducer; 
 

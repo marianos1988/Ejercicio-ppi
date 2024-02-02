@@ -64,6 +64,8 @@ export const Card = () => {
         <DescDate
           date= {ratesFrom.date}
           time= {new Date()}
+          currencieFrom={form.currencieFrom}
+          currencieTo={form.currencieTo}
         />
 
       </div>
