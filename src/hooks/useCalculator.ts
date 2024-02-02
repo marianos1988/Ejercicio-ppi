@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCurrencies, setCurrenciesForChange } from "../reducers/CurrenciesSlice";
+import { setAllCurrencies} from "../reducers/CurrenciesSlice";
 import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
@@ -61,13 +61,7 @@ export const useCalculator = () => {
 
       addTotal(form.amount,ratesFrom.rate[0].rate,`${listCurrencies.orderFirstDollar[0].currencie} - ${listCurrencies.orderFirstDollar[0].properties.name}`,`${listCurrencies.orderFirstEuro[0].currencie} - ${listCurrencies.orderFirstEuro[0].properties.name}`,listCurrencies.orderFirstDollar[0].properties.name,listCurrencies.orderFirstEuro[0].properties.name,listCurrencies.orderFirstDollar[0].currencie,listCurrencies.orderFirstEuro[0].currencie)
 
-      let change = {
-        fromName: listCurrencies.orderFirstDollar[0].properties.name,
-        toName: listCurrencies.orderFirstEuro[0].properties.name,
-        currenceFrom: listCurrencies.orderFirstDollar[0].currencie,
-        currencieTo: listCurrencies.orderFirstEuro[0].currencie,
-      }
-      dispatch(setCurrenciesForChange(change))
+
 
     }
     catch (e) {
@@ -171,7 +165,9 @@ export const useCalculator = () => {
 
   const handleOnClick = async () => {
     
-console.log(form.from);
+
+    
+
     
     
   }

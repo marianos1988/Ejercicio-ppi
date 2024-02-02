@@ -30,7 +30,7 @@
 
 @media (min-width:375px) AND (max-width:460px) {
     .container-desc-date {
-        transform: translate(10px, -52px)
+        transform: translate(3px, -74px)
     }
 
 
@@ -39,7 +39,7 @@
         font-family: Inter;
         font-size: 11px;
         font-weight: 300; 
-        line-height: 23px;
+        line-height: 14px;
         letter-spacing: 0em;
         text-align: left; 
 
@@ -49,7 +49,7 @@
 
 @media (min-width:461px) AND (max-width:562px) {
     .container-desc-date {
-        transform: translate(10px, -69px)
+        transform: translate(27px, -70px)
     }
 
 

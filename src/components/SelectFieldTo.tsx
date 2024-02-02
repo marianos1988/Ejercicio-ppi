@@ -36,7 +36,7 @@ const handleChange = (e:any) => {
   return (
     <div className='box-field'>
       <label className='box-text'>{text}</label>
-      <select name="type-convertion" className="select-field" onChange={handleChange}>
+      <select name="type-convertion" id="select-to" className="select-field" onChange={handleChange}>
       { 
           (currencies.length ===0)
             ? (<option value={""}>{"-----"}</option>)
