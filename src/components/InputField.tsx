@@ -39,7 +39,7 @@ export const InputField = ({ text, inputValue, outputValue }: Props) => {
   return (
     <div className='box-field'>
       <label className='box-text'>{text}</label>
-      <input type="number" step="0.01" className='input-field' placeholder="Enter amount" onChange={(e)=> handleChangeAmount(e)} value={inputValue} />
+      <input type="number" className='input-field' placeholder="Enter amount" onChange={(e)=> handleChangeAmount(e)} value={inputValue} />
       <div className={(error) ? `validate-display error-active` : `validate-display`}>Incorrect value!</div>
     </div>
   )

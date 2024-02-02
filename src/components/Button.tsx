@@ -1,7 +1,7 @@
 import { useCalculator } from "../hooks/useCalculator"
 import "../styles/Button.css"
 
-export const Button = (form:any) => {
+export const Button = () => {
 
   const {handleOnClick} = useCalculator()
   return (

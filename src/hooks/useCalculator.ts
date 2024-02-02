@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCurrencies} from "../reducers/CurrenciesSlice";
+import { setAllCurrencies, changeCurrencieFromToTo} from "../reducers/CurrenciesSlice";
 import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
@@ -51,7 +51,15 @@ export const useCalculator = () => {
 
       const listCurrencies ={
         orderFirstDollar : orderFirstDollar(arrayCurrencies),
-        orderFirstEuro: orderFirstEuro(arrayCurrencies)
+        orderFirstEuro: orderFirstEuro(arrayCurrencies),
+        changeFromToTo: {
+          numberOption: "",
+          currencie: "",
+          properties: {
+            name:"",
+            symbol: ""
+          }
+        }
       } 
 
 
@@ -95,6 +103,7 @@ export const useCalculator = () => {
   }
 
   const [form, setForm] = useState(initialState);
+
  
   
 
@@ -106,6 +115,7 @@ export const useCalculator = () => {
   }
 
   const handleChangeSelect = (value:string,fromOrTo: string) => {
+
 
 
     if(fromOrTo === "from") {
@@ -163,10 +173,10 @@ export const useCalculator = () => {
 
   }
 
-  const handleOnClick = async () => {
+  const handleOnClick = () => {
     
+    changeCurrencieFromToTo("USD")
 
-    
 
     
     

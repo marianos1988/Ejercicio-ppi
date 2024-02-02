@@ -44,7 +44,7 @@ export const Card = () => {
             currencies= {listCurrencies.orderFirstDollar}
           />
           <Button
-          form= {form}
+
           ></Button>
           <SelectFieldTo 
             text="To"
