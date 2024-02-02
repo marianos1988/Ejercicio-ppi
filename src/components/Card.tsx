@@ -58,7 +58,7 @@ export const Card = () => {
           textFrom={form.from}
           valueFrom={form.amount}
           textTo={form.to}
-          valueTo={form.totalTo}
+          valueTo={form.total}
         />
         <Desc />
         <DescDate

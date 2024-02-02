@@ -1,11 +1,5 @@
 
-type Currencies = {
-  currencie: string,
-  properties: {
-    name: string,
-    symbol: string
-  }[]
-}
+
 
 export const useUtils = () => {
 

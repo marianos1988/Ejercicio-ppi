@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useUtils } from "../hooks/useUtils"
 import "../styles/Fields.css"
 
+
 type Props = {
   text: string,
   inputValue: number | string,
@@ -17,15 +18,18 @@ export const InputField = ({ text, inputValue, outputValue }: Props) => {
   const {validateOnlyNumbers} = useUtils();
 
 
+
   const handleChangeAmount = (e:React.ChangeEvent<HTMLInputElement>) => {
 
     const value = (e.target.value);
     if(validateOnlyNumbers(value)) {
       setError(true);
+
     }
     else (
       
       setError(false)
+
     )
     
 

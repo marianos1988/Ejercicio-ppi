@@ -3,7 +3,7 @@ import "../styles/ResultDisplay.css"
 type Props = {
   valueFrom: number | string,
   textFrom: string,
-  valueTo: string,
+  valueTo: number,
   textTo: string
 }
 

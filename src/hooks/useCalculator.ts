@@ -5,58 +5,12 @@ import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
 type InitialState = {
-  amount: number | string,
+  amount: any
   from: string,
   to: string,
   totalTo: string
-}
+  total: number,
 
-type Currencies = {
-  forEach(arg0: (urrencie: any) => void): unknown;
-  currencie: string,
-  properties: {
-    name: string,
-    symbol: string
-  }[]
-}
-
-type Rates = {
-  forEach(arg0: (rate: any) => void): unknown;
-  currencie: string,
-  date: string,
-  rates: {
-    AUD: number,
-    BGN: number,
-    BRL: number,
-    CAD: number,
-    CHF: number,
-    CNY: number,
-    CZK: number,
-    DKK: number,
-    EUR: number,
-    GBP: number,
-    HKD: number,
-    HUF: number,
-    IDR: number,
-    ILS: number,
-    INR: number,
-    ISK: number,
-    JPY: number,
-    KRW: number,
-    MXN: number,
-    MYR: number,
-    NOK: number,
-    NZD: number,
-    PHP: number,
-    PLN: number,
-    RON: number,
-    SEK: number,
-    SGD: number,
-    THB: number,
-    TRY: number,
-    USD: number,
-    ZAR: number,
-  }[]
 }
 
 
@@ -70,10 +24,11 @@ export const useCalculator = () => {
   
 
   const initialState:InitialState = {
-    amount: "1.00",
+    amount: `1.00`,
     from: "USD - US Dolar",
     to: "EUR - Euro",
-    totalTo: "0.9247272054743851"
+    totalTo: "0.9247272054743851",
+    total: 0
   }
 
   const  {orderFirstDollar, orderFirstEuro} = useUtils();
@@ -93,13 +48,8 @@ export const useCalculator = () => {
 
 
       dispatch(setAllCurrencies(listCurrencies));
+      addTotal(form.amount,`${ratesFrom.rate[0].rate}`,`${listCurrencies.orderFirstDollar[0].currencie} - ${listCurrencies.orderFirstDollar[0].properties.name}`,`${listCurrencies.orderFirstEuro[0].currencie} - ${listCurrencies.orderFirstEuro[0].properties.name}`)
 
-      setForm({
-        amount: form.amount,
-        from: `${listCurrencies.orderFirstDollar[0].currencie} - ${listCurrencies.orderFirstDollar[0].properties.name}`,
-        to: `${listCurrencies.orderFirstEuro[0].currencie} - ${listCurrencies.orderFirstEuro[0].properties.name}`,
-        totalTo: `${ratesFrom.rate[0].rate}`.toString().slice(0,5)
-      })
 
     }
     catch (e) {
@@ -130,15 +80,13 @@ export const useCalculator = () => {
 
   }
 
-  const [form, setForm] = useState(initialState)
+  const [form, setForm] = useState(initialState);
+ 
+  
 
-  const handleChangeInput = (value:number) => {
-    setForm({
-      amount: value,
-      from: form.from,
-      to: form.to,
-      totalTo: form.totalTo
-    });
+  const handleChangeInput = (value:string) => {
+
+    addTotal(value,form.totalTo,form.from,form.to)
 
   }
 
@@ -149,12 +97,8 @@ export const useCalculator = () => {
       listCurrencies.orderFirstDollar.forEach((currencie:any) => {
         
         if(value === currencie.currencie) {
-          setForm({
-            amount: form.amount,
-            from: `${currencie.currencie} - ${currencie.properties.name}`,
-            to: form.to,
-            totalTo: form.totalTo
-          });
+          addTotal(form.amount,form.totalTo,`${currencie.currencie} - ${currencie.properties.name}`,form.to)
+
         }
       })
 
@@ -163,34 +107,39 @@ export const useCalculator = () => {
             listCurrencies.orderFirstDollar.forEach((currencie:any) => {
         
         if(value === currencie.currencie) {
-          setForm({
-            amount: form.amount,
-            from: `${currencie.currencie} - ${currencie.properties.name}`,
-            to: form.to,
-            totalTo: form.totalTo
-          });
+          addTotal(form.amount,value,`${currencie.currencie} - ${currencie.properties.name}`,form.to)
+
         }
       })
 
     }
   }
-  const handleChangeSelectTo = (value:string,fromOrTo: string) => {
+  const handleChangeSelectTo = (value:string,_fromOrTo: string) => {
 
-    console.log(value);
 
             listCurrencies.orderFirstEuro.forEach((currencie:any) => {
         
         if(value === currencie.currencie) {
-          setForm({
-            amount: form.amount,
-            from: form.from,
-            to: `${currencie.currencie} - ${currencie.properties.name}`,
-            totalTo: form.totalTo
-          });
+          addTotal(form.amount,form.totalTo,form.from,`${currencie.currencie} - ${currencie.properties.name}`)
         }
       })
 
   }
+
+  const addTotal = (amount:string, totalTo:string,from:string,to:string) => {
+    let num1:number = parseFloat(amount);
+    let num2:number= parseFloat(totalTo);
+    let total:number= (num1*num2);
+
+    setForm({
+      amount:amount,
+      from: from,
+      to: to,
+      totalTo: totalTo,
+      total: total
+    })
+  }
+
 
 
   return {
@@ -200,6 +149,7 @@ export const useCalculator = () => {
     handleChangeSelectTo,
     getFetchCurrencies,
     getFetchRates,
+    addTotal
 
   }
 }

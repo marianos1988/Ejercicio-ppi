@@ -1,6 +1,6 @@
 import { useCalculator } from "../hooks/useCalculator"
 import "../styles/Fields.css"
-import { useDispatch, useSelector } from "react-redux"
+
 
 type Props = {
   text: string
@@ -17,9 +17,9 @@ type Currencie = {
   }
 }
 
-export const SelectFieldFrom = ({ text, inputValue, outputValue, currencies }: Props) => {
+export const SelectFieldFrom = ({ text, outputValue, currencies }: Props) => {
 
-  const dispatch = useDispatch();
+
 const { getFetchRates } = useCalculator();
 
 
