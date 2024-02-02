@@ -295,4 +295,9 @@
     }
 
 }
+@media (min-width:1200px) {
+    .container-result-display .reverse-value-display {
+        transform: translate(0px,56px);
+    }
+}
 
