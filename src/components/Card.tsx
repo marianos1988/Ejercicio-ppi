@@ -1,6 +1,6 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "../styles/Card.css"
-import { Button } from "./Button"
+import "../styles/Button.css"
 import { Desc } from "./Desc"
 import { DescDate } from "./DescDate"
 import { InputField } from "./InputField"
@@ -14,6 +14,13 @@ import { SelectFieldTo } from "./SelectFieldTo"
 export const Card = () => {
 
   const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
+ 
+  const [change, setChange] = useState<{active:boolean,selectFrom:string,selectTo:string}>({
+    active: false,
+    selectFrom: "",
+    selectTo: "",
+    
+  });
 
   useEffect(()=>{
     getFetchCurrencies();
@@ -41,17 +48,25 @@ export const Card = () => {
             text="From"
             inputValue = {form.from}
             outputValue={(e)=>handleChangeSelect(e,"from")}
-            currencies= {listCurrencies.orderFirstDollar}
-          />
-          <Button
+            currenciesFrom= {listCurrencies.orderFirstDollar}
+            currenciesTo= {listCurrencies.orderFirstEuro}
+            change= {change.active}
+            selectTo= {change.selectTo}
 
-          ></Button>
+          />
+          <button className="btn-convert" onClick={()=>{setChange({active:!change.active,selectFrom:form.currencieFromSimbol,selectTo:form.currencieToSimbol})}}></button>
           <SelectFieldTo 
             text="To"
             inputValue={ratesFrom.rates}
             outputValue={(e)=>handleChangeSelect(e,"to")}
-            outputCurrencie = {(e: string)=>{handleChangeSelectTo(e,"to")}}
-            currencies= {listCurrencies.orderFirstEuro}
+            outputCurrencie= {(e: string)=>{
+              handleChangeSelectTo(e,"to")
+            }}
+            currenciesTo= {listCurrencies.orderFirstEuro}
+            currenciesFrom={listCurrencies.orderFirstDollar}
+            change={change.active}
+            selectFrom={change.selectFrom}
+
           />
         </div>
         <ResultDisplay 

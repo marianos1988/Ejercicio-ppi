@@ -15,16 +15,7 @@
         name: string,
         symbol:string,
       }
-    }[],
-    changeFromToTo:{
-      numberOption: string
-      currencie: string,
-      properties: {
-        name: string,
-        symbol:string,
-      }
-    },
-    
+    }[],    
   }
     }
 
@@ -45,14 +36,6 @@
         symbol:"",
       }
     }],
-    changeFromToTo: {
-      numberOption: "",
-      currencie: "",
-      properties: {
-        name:"",
-        symbol: ""
-      }
-    }
 
   }
  }
@@ -66,27 +49,10 @@
         state.listCurrencies = action.payload;
       },
 
-      changeCurrencieFromToTo: (state:any, action) => {
-        const value = action.payload;
-        const currenciesAll = state.listCurrencies.orderFirstDollar;
-        currenciesAll.forEach( (currencie: { currencie: any; properties: { name: any; symbol: any; }; }) =>{
-          if(value.from === currencie.currencie) {
-            state.listCurrencies.changeFromToTo = {
-              currencie: currencie.currencie,
-              properties: {
-                name: currencie.properties.name,
-                symbol: currencie.properties.symbol
-              }
-            }
-          }
-        }
-
-        )
-      }
     } 
  }); 
 
- export const { setAllCurrencies,changeCurrencieFromToTo } = CurrenciesSlice.actions;
+ export const { setAllCurrencies} = CurrenciesSlice.actions;
 
 export default CurrenciesSlice.reducer; 
 

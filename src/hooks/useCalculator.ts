@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCurrencies, changeCurrencieFromToTo} from "../reducers/CurrenciesSlice";
+import { setAllCurrencies} from "../reducers/CurrenciesSlice";
 import { setRatesFrom } from "../reducers/RatesSlice";
 import { useUtils } from "./useUtils";
 
 type InitialState = {
+
   amount: any
   from: string,
   to: string,
@@ -29,6 +30,7 @@ export const useCalculator = () => {
   
 
   const initialState:InitialState = {
+
     amount: `1.00`,
     from: "USD - US Dolar",
     to: "EUR - Euro",
@@ -39,6 +41,10 @@ export const useCalculator = () => {
     currencieFromSimbol: "USD",
     currencieToSimbol: "EUR"
   }
+
+
+  
+  const [form, setForm] = useState(initialState);
 
   const  {orderFirstDollar, orderFirstEuro} = useUtils();
 
@@ -101,12 +107,6 @@ export const useCalculator = () => {
     
 
   }
-
-  const [form, setForm] = useState(initialState);
-
- 
-  
-
   const handleChangeInput = (value:string) => {
 
     addTotal(value,form.totalTo,form.from,form.to,form.currencieFrom,form.currencieTo,form.currencieFromSimbol,form.currencieToSimbol)
@@ -115,15 +115,13 @@ export const useCalculator = () => {
   }
 
   const handleChangeSelect = (value:string,fromOrTo: string) => {
-
-
-
+    console.log(value)
     if(fromOrTo === "from") {
       listCurrencies.orderFirstDollar.forEach((currencie:any) => {
-        
+
         if(value === currencie.currencie) {
 
-          addTotal(form.amount,form.totalTo,`${currencie.currencie} - ${currencie.properties.name}`,form.to,currencie.properties.name,form.currencieTo,value,form.currencieToSimbol)
+          addTotal(form.amount,form.totalTo,currencie.properties.name,form.to,currencie.properties.name,form.currencieTo,value,form.currencieToSimbol)
 
         }
       })
@@ -131,7 +129,7 @@ export const useCalculator = () => {
     }
     else if(fromOrTo === "to") {
             listCurrencies.orderFirstDollar.forEach((currencie:any) => {
-        
+
         if(value === currencie.currencie) {
 
           addTotal(form.amount,value,`${currencie.currencie} - ${currencie.properties.name}`,form.to,form.currencieFrom,currencie.properties.name,form.currencieFromSimbol,value)
@@ -148,6 +146,7 @@ export const useCalculator = () => {
     
     if(value === currencie.currencie) {
       addTotal(form.amount,form.totalTo,form.from,`${currencie.currencie} - ${currencie.properties.name}`,form.currencieFrom,currencie.properties.name,form.currencieFromSimbol,value)
+
     }
   })
 
@@ -158,29 +157,22 @@ export const useCalculator = () => {
     let num2:number= parseFloat(totalTo);
     let total:number= (num1*num2);
 
-    setForm({
-      amount:amount,
-      from: from,
-      to: to,
-      totalTo: totalTo,
-      total: total,
-      currencieFrom: currencieFrom,
-      currencieTo: currencieTo,
-      currencieFromSimbol: currencieFromSimbol,
-      currencieToSimbol: currencieToSimbol
 
-    })
+      setForm({
 
+        amount:amount,
+        from: to,
+        to: from,
+        totalTo: totalTo,
+        total: total,
+        currencieFrom: currencieTo,
+        currencieTo: currencieFrom,
+        currencieFromSimbol: currencieToSimbol,
+        currencieToSimbol: currencieFromSimbol
+  
+      })
   }
 
-  const handleOnClick = () => {
-    
-    changeCurrencieFromToTo("USD")
-
-
-    
-    
-  }
 
 
 
@@ -192,7 +184,6 @@ export const useCalculator = () => {
     getFetchCurrencies,
     getFetchRates,
     addTotal,
-    handleOnClick
 
   }
 }

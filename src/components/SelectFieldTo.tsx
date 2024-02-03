@@ -1,12 +1,26 @@
 
+
 import "../styles/Fields.css"
+type Currencies = {
+  map(arg0: (currencie: Currencie) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
+  length: number
+  currencie: string,
+  properties: {
+    name: string,
+    symbol: string
+  }[]
+}
 
 type Props = {
   text: string
   inputValue: any,
   outputValue: (e:string) => void
-  currencies: any,
+  currenciesTo: Currencies,
+  currenciesFrom: Currencies
   outputCurrencie: any
+  change: boolean
+  selectFrom: string
+
 }
 
 type Currencie = {
@@ -17,7 +31,7 @@ type Currencie = {
   }
 }
 
-export const SelectFieldTo = ({ text, inputValue, outputValue, currencies, outputCurrencie }: Props) => {
+export const SelectFieldTo = ({ text, inputValue, outputValue, currenciesTo,currenciesFrom, outputCurrencie, change, selectFrom }: Props) => {
 
 
 const handleChange = (e:any) => {
@@ -38,13 +52,26 @@ const handleChange = (e:any) => {
       <label className='box-text'>{text}</label>
       <select name="type-convertion" id="select-to" className="select-field" onChange={handleChange}>
       { 
-          (currencies.length ===0)
+          (currenciesTo.length === 0)
             ? (<option value={""}>{"-----"}</option>)
-            : (
-              currencies.map((currencie:Currencie)=>(
-                <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
-              ))
-            )
+            : (change)
+                ? ( 
+                    currenciesFrom.map((currencie:Currencie)=>(
+
+                      (currencie.currencie === selectFrom) 
+                        ? (
+                            <option key={currencie.currencie} value={currencie.currencie} selected>{currencie.properties.name}</option>
+                          ) 
+                        : (
+                            <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
+                          )
+                )))
+                : 
+                 (
+                    currenciesTo.map((currencie:Currencie)=>(
+                    <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
+                )))
+            
         }
       </select>
     </div>
