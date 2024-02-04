@@ -45,7 +45,7 @@
     
     .container-result-display {
 
-            transform: translate(25px,-20px);
+            transform: translate(28px,-27px);
     }
     
     .value-display p {
@@ -66,37 +66,8 @@
 
 }
 
-@media (min-width: 476px) AND (max-width: 650px) {
 
-    .container-result-display {
-
-        transform: translate(25px,-20px);
-}
-
-    .value-display p {
-        font-family: Inter;
-        font-size: 11px;
-        font-weight: 300;
-        line-height: 5px;
-        letter-spacing: 0em;
-        text-align: left;
-        margin-left: 15px;
-
-    }
-
-    .container-result-display .reverse-value-display {
-        transform: translate(-64px,-61px)
-    }
-    .container-result-display .reverse-value-display {
-        transform: translate(0px,0px);
-    }
-
-    .container-result-display .reverse-value-display {
-        transform: translate(-62px,-45px);
-    }
-}
-
-@media (min-width: 477px) AND (max-width:576px) {
+@media (min-width: 476px) AND (max-width:576px) {
     
     .container-result-display {
 
