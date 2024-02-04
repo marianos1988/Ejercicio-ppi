@@ -9,7 +9,8 @@ import { SelectFieldFrom } from "./SelectFieldFrom"
 import { useCalculator } from "../hooks/useCalculator" 
 import { useSelector, useDispatch } from "react-redux"
 import { SelectFieldTo } from "./SelectFieldTo"
-import { setRatesTo} from "../reducers/CurrenciesRatesSlice"
+import { useUtils } from "../hooks/useUtils"
+
 
 
 export const Card = () => {
@@ -19,16 +20,17 @@ export const Card = () => {
   const { allResults } = useSelector((state:any) => state.currencies.results);
   const { ratesFrom } = useSelector((state:any) => state.currencies.listRates);
   
-  const [change, setChange] = useState(false);
-  const [viewSelect, _setViewSelect] = useState({
-    from: allResults.currencieFromSimbol,
-    To: allResults.currencieToSimbol
-  });
+  const { orderFirstDollar, orderFirstEuro } = useUtils();
+
 
   useEffect(()=>{
     getFetchCurrencies();
     getFetchRates("USD");
   },[]);
+
+  const firstDolar = orderFirstDollar(listCurrencies)
+  const firstEuro = orderFirstEuro(listCurrencies)
+
 
 
   return (
@@ -47,16 +49,17 @@ export const Card = () => {
             outputValue={(e)=>handleChangeSelectFrom(e)}
             currenciesFrom= {listCurrencies}
             currenciesTo= {listCurrencies}
-            change= {change}
-            selectTo= {viewSelect.To}
+            selectTo= {allResults.currencieFromSimbol}
+            firstSelectFrom={{currencie: allResults.currencieFromSimbol, currencieFrom: allResults.currencieFrom}}
 
           />
           <button className="btn-convert" onClick={async ()=>{
 
             
             await getFetchRates(allResults.currencieToSimbol);
-            reverseResult(allResults);
-             setChange(!change)
+
+             
+             reverseResult(allResults);
 
 
 
@@ -72,8 +75,9 @@ export const Card = () => {
             }}
             currenciesTo= {listCurrencies}
             currenciesFrom={listCurrencies}
-            change={change}
-            selectFrom={viewSelect.from}
+            selectFrom={allResults.currencieToSimbol}
+            firstSelectTo={{currencie: allResults.currencieToSimbol, currencieTo: allResults.currencieTo}}
+
 
           />
         </div>

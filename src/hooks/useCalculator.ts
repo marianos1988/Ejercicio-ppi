@@ -3,11 +3,17 @@ import { setAllCurrencies, setRatesFrom, setRatesTo, setResultsAmount, setResult
 import { useUtils } from "./useUtils";
 
 
+
 export const useCalculator = () => {
 
   const dispatch =  useDispatch();
   const { rightDate } = useUtils();
   const { listCurrencies } = useSelector((state:any) => state.currencies);
+  const { allResults } = useSelector((state:any) => state.currencies.results);
+
+  const newAllResult = allResults;
+
+
 
 
 
@@ -79,6 +85,7 @@ export const useCalculator = () => {
           dispatch(setResultsFrom(object));
           dispatch(setCurrencieFromSimbol(object.currencie));
 
+
         }
       })
 
@@ -99,17 +106,18 @@ export const useCalculator = () => {
       dispatch(setResultsTo(object))
       dispatch(setCurrencieToSimbol(object.currencie));
 
-
-
     }
   })
 
   }
 
 
-  const reverseResult = (results: any )=> {
+  const reverseResult = async (results: any )=> {
     const object = results;
 
+
+    console.log(`antes de cargar el from simbol`,results.currencieFromSimbol)
+    console.log(`antes de cargar el to simbol`,results.currencieToSimbol)
 
     let objectEdit = {
       amount: object.amount,
@@ -122,15 +130,20 @@ export const useCalculator = () => {
       currencieFromSimbol: object.currencieToSimbol,
       currencieToSimbol: object.currencieFromSimbol
     }
-    console.log(`objeto Modificado`,objectEdit)
 
-    dispatch(setAllResults(objectEdit));
-    
+      dispatch(setAllResults(objectEdit));
+
+
+
+   
+
+
     // dispatch(setRatesTo(value));
     // dispatch(setResultsTo(object))
 
-
   }
+
+
 
 
   return {
@@ -139,7 +152,7 @@ export const useCalculator = () => {
     handleChangeSelectTo,
     getFetchCurrencies,
     getFetchRates,
-    reverseResult
+    reverseResult,
 
   }
 }
