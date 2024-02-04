@@ -7,18 +7,23 @@ import { InputField } from "./InputField"
 import { ResultDisplay } from "./ResultDisplay"
 import { SelectFieldFrom } from "./SelectFieldFrom"
 import { useCalculator } from "../hooks/useCalculator" 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { SelectFieldTo } from "./SelectFieldTo"
+import { setRatesTo} from "../reducers/CurrenciesRatesSlice"
 
 
 export const Card = () => {
-
-  const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelectFrom, getFetchCurrencies, getFetchRates} = useCalculator();
+  const dispatch = useDispatch();
+  const { handleChangeInput,handleChangeSelectTo, handleChangeSelectFrom, getFetchCurrencies, getFetchRates, reverseResult} = useCalculator();
   const { listCurrencies } = useSelector((state:any) => state.currencies);
   const { allResults } = useSelector((state:any) => state.currencies.results);
   const { ratesFrom } = useSelector((state:any) => state.currencies.listRates);
   
   const [change, setChange] = useState(false);
+  const [viewSelect, _setViewSelect] = useState({
+    from: allResults.currencieFromSimbol,
+    To: allResults.currencieToSimbol
+  });
 
   useEffect(()=>{
     getFetchCurrencies();
@@ -43,15 +48,17 @@ export const Card = () => {
             currenciesFrom= {listCurrencies}
             currenciesTo= {listCurrencies}
             change= {change}
-            selectTo= {allResults.currencieToSimbol}
+            selectTo= {viewSelect.To}
 
           />
           <button className="btn-convert" onClick={async ()=>{
 
+            
             await getFetchRates(allResults.currencieToSimbol);
+            reverseResult(allResults);
              setChange(!change)
 
-            handleChangeSelectTo(allResults.currencieToSimbol)
+
 
 
             }}
@@ -66,7 +73,7 @@ export const Card = () => {
             currenciesTo= {listCurrencies}
             currenciesFrom={listCurrencies}
             change={change}
-            selectFrom={allResults.currencieFromSimbol}
+            selectFrom={viewSelect.from}
 
           />
         </div>

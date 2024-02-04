@@ -153,6 +153,7 @@
       setResultsFrom: (state,action) => {
         const object = action.payload;
         state.results.allResults.from = `${object.currencie} - ${object.name}`;
+        state.results.allResults.currencieFrom = object.name;
       },
       setResultsTo: (state,action) => {
         const object = action.payload;
@@ -165,11 +166,27 @@
       setCurrencieToSimbol: (state,action) => {
         state.results.allResults.currencieToSimbol = action.payload;
       },
+      setAllResults: (state,action) => {
+
+        const object = action.payload
+        state.results.allResults.amount = object.amount;
+        state.results.allResults.currencieFrom = object.currencieFrom;
+        state.results.allResults.currencieFromSimbol = object.currencieFromSimbol;
+        state.results.allResults.currencieTo = object.currencieTo;
+        state.results.allResults.currencieToSimbol = object.currencieToSimbol;
+        state.results.allResults.from = object.from;
+        state.results.allResults.to = object.to;
+        state.results.allResults.total = object.total;
+        state.results.allResults.totalTo = object.totalTo;
+
+
+
+      }
 
     } 
  }); 
 
- export const { setAllCurrencies, setRatesFrom, setRatesTo, setResultsAmount, setResultsFrom, setResultsTo, setCurrencieFromSimbol,setCurrencieToSimbol} = CurrenciesRatesSlice.actions;
+ export const { setAllCurrencies, setRatesFrom, setRatesTo, setResultsAmount, setResultsFrom, setResultsTo, setCurrencieFromSimbol,setCurrencieToSimbol, setAllResults} = CurrenciesRatesSlice.actions;
 
 export default CurrenciesRatesSlice.reducer; 
 

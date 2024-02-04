@@ -1,22 +1,6 @@
-import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setAllCurrencies, setRatesFrom, setRatesTo, setResultsAmount, setResultsFrom, setResultsTo, setCurrencieFromSimbol, setCurrencieToSimbol} from "../reducers/CurrenciesRatesSlice";
+import { setAllCurrencies, setRatesFrom, setRatesTo, setResultsAmount, setResultsFrom, setResultsTo, setCurrencieFromSimbol, setCurrencieToSimbol, setAllResults} from "../reducers/CurrenciesRatesSlice";
 import { useUtils } from "./useUtils";
-
-type InitialState = {
-
-  amount: any
-  from: string,
-  to: string,
-  totalTo: any
-  total: number,
-  currencieFrom: string
-  currencieTo: string
-  currencieFromSimbol: string,
-  currencieToSimbol: string,
-
-
-}
 
 
 export const useCalculator = () => {
@@ -25,31 +9,11 @@ export const useCalculator = () => {
   const { rightDate } = useUtils();
   const { listCurrencies } = useSelector((state:any) => state.currencies);
 
+
+
   const newListCurrencies = listCurrencies;
 
 
-
-  
-
-  const initialState:InitialState = {
-
-    amount: (1.00).toFixed(2),
-    from: "USD - US Dolar",
-    to: "EUR - Euro",
-    totalTo: (0.9188642837452908).toFixed(16),
-    total: 0.9188642837452908,
-    currencieFrom: "US Dolar",
-    currencieTo: "Euro",
-    currencieFromSimbol: "USD",
-    currencieToSimbol: "EUR"
-  }
-
-
-  
-  const [form, setForm] = useState(initialState);
-
-
-  
 
   const getFetchCurrencies = async () => {
 
@@ -140,17 +104,42 @@ export const useCalculator = () => {
     }
   })
 
-}
+  }
 
+
+  const reverseResult = (results: any )=> {
+    const object = results;
+
+
+    let objectEdit = {
+      amount: object.amount,
+      from: object.to,
+      to: object.from,
+      totalTo: object.totalTo,
+      total: object.amount * object.totalTo,
+      currencieFrom: object.currencieTo,
+      currencieTo: object.currencieFrom,
+      currencieFromSimbol: object.currencieToSimbol,
+      currencieToSimbol: object.currencieFromSimbol
+    }
+    console.log(`objeto Modificado`,objectEdit)
+
+    dispatch(setAllResults(objectEdit));
+    
+    // dispatch(setRatesTo(value));
+    // dispatch(setResultsTo(object))
+
+
+  }
 
 
   return {
-    form,
     handleChangeInput,
     handleChangeSelectFrom,
     handleChangeSelectTo,
     getFetchCurrencies,
     getFetchRates,
+    reverseResult
 
   }
 }

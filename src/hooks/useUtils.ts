@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+
 
 
 
 export const useUtils = () => {
 
-  const { listCurrencies } = useSelector((state:any) => state.currencies);
+
   const rightDate = (date:number,month:number, year:number) => {
 
     const addZero = (number:number) => {
