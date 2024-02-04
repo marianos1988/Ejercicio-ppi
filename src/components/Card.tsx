@@ -13,20 +13,17 @@ import { SelectFieldTo } from "./SelectFieldTo"
 
 export const Card = () => {
 
-  const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
+  const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelectFrom, getFetchCurrencies, getFetchRates} = useCalculator();
+  const { listCurrencies } = useSelector((state:any) => state.currencies);
+  const { allResults } = useSelector((state:any) => state.currencies.results);
+  const { ratesFrom } = useSelector((state:any) => state.currencies.listRates);
   
   const [change, setChange] = useState(false);
 
   useEffect(()=>{
     getFetchCurrencies();
     getFetchRates("USD");
-
-
   },[]);
-
-
-  const { listCurrencies } = useSelector((state:any) => state.currencies);
-  const { ratesFrom } = useSelector((state:any) => state.rates);
 
 
   return (
@@ -35,56 +32,56 @@ export const Card = () => {
         <div className="container-fields">
           <InputField
             text="Amount"
-            inputValue = {form.amount}
+            inputValue = {allResults.amount}
             outputValue={handleChangeInput}
 
           />
           <SelectFieldFrom
             text="From"
-            inputValue = {form.from}
-            outputValue={(e)=>handleChangeSelect(e,"from")}
+            inputValue = {allResults.from}
+            outputValue={(e)=>handleChangeSelectFrom(e)}
             currenciesFrom= {listCurrencies}
             currenciesTo= {listCurrencies}
             change= {change}
-            selectTo= {form.currencieToSimbol}
+            selectTo= {allResults.currencieToSimbol}
 
           />
           <button className="btn-convert" onClick={async ()=>{
 
-            await getFetchRates(form.currencieToSimbol);
-             setChange(change)
+            await getFetchRates(allResults.currencieToSimbol);
+             setChange(!change)
 
-            handleChangeSelect(form.currencieToSimbol,"to")
+            handleChangeSelectTo(allResults.currencieToSimbol)
 
 
             }}
           />
           <SelectFieldTo 
             text="To"
-            inputValue={ratesFrom.rates}
-            outputValue={(e)=>handleChangeSelect(e,"to")}
+            inputValue={listCurrencies.rates}
+            outputValue={(e)=>handleChangeSelectTo(e)}
             outputCurrencie= {(e: string)=>{
-              handleChangeSelectTo(e,"to")
+              handleChangeSelectTo(e)
             }}
             currenciesTo= {listCurrencies}
             currenciesFrom={listCurrencies}
             change={change}
-            selectFrom={form.currencieFromSimbol}
+            selectFrom={allResults.currencieFromSimbol}
 
           />
         </div>
         <ResultDisplay 
-          textFrom={form.from}
-          valueFrom={form.amount}
-          textTo={form.to}
-          valueTo={form.total}
+          textFrom={allResults.from}
+          valueFrom={allResults.amount}
+          textTo={allResults.to}
+          valueTo={allResults.total}
         />
         <Desc />
         <DescDate
           date= {ratesFrom.date}
           time= {new Date()}
-          currencieFrom={form.currencieFrom}
-          currencieTo={form.currencieTo}
+          currencieFrom={allResults.currencieFrom}
+          currencieTo={allResults.currencieTo}
         />
 
       </div>

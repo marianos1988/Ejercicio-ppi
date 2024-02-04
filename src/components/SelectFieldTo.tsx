@@ -70,9 +70,16 @@ const handleChange = (e:any) => {
                 : 
                  (
                     currenciesTo.map((currencie:Currencie)=>(
-                    <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
+                      (currencie.currencie === "EUR")
+                        ? (
+                          <option key={currencie.currencie} value={currencie.currencie} selected>{currencie.properties.name}</option>
+                        )
+                        : (
+                          <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
+                        )
+
                 )))
-            
+                       
         }
       </select>
     </div>

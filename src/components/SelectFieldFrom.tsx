@@ -67,8 +67,13 @@ const handleChange = async (e:any) => {
               )
               : (
                   currenciesFrom.map((currencie:Currencie)=>(
-                    <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
-              
+                    (currencie.currencie === "USD")
+                      ? (
+                        <option key={currencie.currencie} value={currencie.currencie} selected>{currencie.properties.name}</option>
+                      )
+                      : (
+                          <option key={currencie.currencie} value={currencie.currencie}>{currencie.properties.name}</option>
+                          )
                   ))  
               
                 )
