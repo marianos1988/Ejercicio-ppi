@@ -38,9 +38,9 @@ const { getFetchRates } = useCalculator();
 
 
 
-const handleChange = (e:any) => {
+const handleChange = async (e:any) => {
 
-  getFetchRates(e.target.value);
+  await getFetchRates(e.target.value);
   return outputValue(e.target.value);
 } 
 
@@ -62,7 +62,6 @@ const handleChange = (e:any) => {
                      : (
                       <option key={currencie.currencie} value={currenciesFrom.currencie}>{currencie.properties.name}</option>
                      )
-
                 ))
                 
               )

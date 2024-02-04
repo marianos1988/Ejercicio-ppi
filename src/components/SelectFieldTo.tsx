@@ -35,6 +35,7 @@ export const SelectFieldTo = ({ text, inputValue, outputValue, currenciesTo,curr
 
 
 const handleChange = (e:any) => {
+  
   outputCurrencie(e.target.value)
 
   for(let ele in inputValue) {

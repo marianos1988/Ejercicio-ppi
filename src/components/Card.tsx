@@ -14,13 +14,8 @@ import { SelectFieldTo } from "./SelectFieldTo"
 export const Card = () => {
 
   const { form, handleChangeInput,handleChangeSelectTo, handleChangeSelect, getFetchCurrencies, getFetchRates} = useCalculator();
- 
-  const [change, setChange] = useState<{active:boolean,selectFrom:string,selectTo:string}>({
-    active: false,
-    selectFrom: "",
-    selectTo: "",
-    
-  });
+  
+  const [change, setChange] = useState(false);
 
   useEffect(()=>{
     getFetchCurrencies();
@@ -48,13 +43,22 @@ export const Card = () => {
             text="From"
             inputValue = {form.from}
             outputValue={(e)=>handleChangeSelect(e,"from")}
-            currenciesFrom= {listCurrencies.orderFirstDollar}
-            currenciesTo= {listCurrencies.orderFirstEuro}
-            change= {change.active}
-            selectTo= {change.selectTo}
+            currenciesFrom= {listCurrencies}
+            currenciesTo= {listCurrencies}
+            change= {change}
+            selectTo= {form.currencieToSimbol}
 
           />
-          <button className="btn-convert" onClick={()=>{setChange({active:!change.active,selectFrom:form.currencieFromSimbol,selectTo:form.currencieToSimbol})}}></button>
+          <button className="btn-convert" onClick={async ()=>{
+
+            await getFetchRates(form.currencieToSimbol);
+             setChange(change)
+
+            handleChangeSelect(form.currencieToSimbol,"to")
+
+
+            }}
+          />
           <SelectFieldTo 
             text="To"
             inputValue={ratesFrom.rates}
@@ -62,10 +66,10 @@ export const Card = () => {
             outputCurrencie= {(e: string)=>{
               handleChangeSelectTo(e,"to")
             }}
-            currenciesTo= {listCurrencies.orderFirstEuro}
-            currenciesFrom={listCurrencies.orderFirstDollar}
-            change={change.active}
-            selectFrom={change.selectFrom}
+            currenciesTo= {listCurrencies}
+            currenciesFrom={listCurrencies}
+            change={change}
+            selectFrom={form.currencieFromSimbol}
 
           />
         </div>

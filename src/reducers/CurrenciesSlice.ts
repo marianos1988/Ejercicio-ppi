@@ -2,43 +2,23 @@
 
  type ListCurrencies = {
   listCurrencies: {
-    orderFirstDollar: {
-      currencie:string 
-      properties: {
-        name: string
-        symbol:string
-      }
-    }[],
-    orderFirstEuro:{
-      currencie: string,
-      properties: {
-        name: string,
-        symbol:string,
-      }
-    }[],    
-  }
+    currencie:string 
+    properties: {
+      name: string
+      symbol:string
+    }
+  }[]
     }
 
 
  const initialState:ListCurrencies= {
-  listCurrencies: {
-    orderFirstDollar: [{
+  listCurrencies: [{
       currencie: "",
       properties: {
         name: "",
         symbol:"",
       }
-    }],
-    orderFirstEuro:[{
-      currencie: "",
-      properties: {
-        name: "",
-        symbol:"",
-      }
-    }],
-
-  }
- }
+    }]};
 
 
  const CurrenciesSlice = createSlice({

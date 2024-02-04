@@ -38,10 +38,8 @@ const initialState = {
       TRY: 0,
       USD: 0,
       ZAR: 0,
-    },
-    asd: "asd"
+    }
   },
-
 
 }
 

@@ -6,7 +6,7 @@ import "../styles/Fields.css"
 
 type Props = {
   text: string,
-  inputValue: number | string,
+  inputValue: number,
   outputValue: (value:any) => void,
 
 
