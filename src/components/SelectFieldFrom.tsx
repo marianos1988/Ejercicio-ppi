@@ -38,7 +38,6 @@ type Currencie = {
 
 export const SelectFieldFrom = ({ text, outputValue, currenciesFrom, firstSelectFrom}: Props) => {
 
-  console.log(firstSelectFrom)
 
 const { getFetchRates } = useCalculator();
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import "../styles/Card.css"
 import "../styles/Button.css"
 import { Desc } from "./Desc"
@@ -7,20 +7,20 @@ import { InputField } from "./InputField"
 import { ResultDisplay } from "./ResultDisplay"
 import { SelectFieldFrom } from "./SelectFieldFrom"
 import { useCalculator } from "../hooks/useCalculator" 
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { SelectFieldTo } from "./SelectFieldTo"
-import { useUtils } from "../hooks/useUtils"
+
 
 
 
 export const Card = () => {
-  const dispatch = useDispatch();
+
   const { handleChangeInput,handleChangeSelectTo, handleChangeSelectFrom, getFetchCurrencies, getFetchRates, reverseResult} = useCalculator();
   const { listCurrencies } = useSelector((state:any) => state.currencies);
   const { allResults } = useSelector((state:any) => state.currencies.results);
   const { ratesFrom } = useSelector((state:any) => state.currencies.listRates);
   
-  const { orderFirstDollar, orderFirstEuro } = useUtils();
+
 
 
   useEffect(()=>{
@@ -28,8 +28,6 @@ export const Card = () => {
     getFetchRates("USD");
   },[]);
 
-  const firstDolar = orderFirstDollar(listCurrencies)
-  const firstEuro = orderFirstEuro(listCurrencies)
 
 
 

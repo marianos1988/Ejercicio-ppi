@@ -9,12 +9,6 @@ export const useCalculator = () => {
   const dispatch =  useDispatch();
   const { rightDate } = useUtils();
   const { listCurrencies } = useSelector((state:any) => state.currencies);
-  const { allResults } = useSelector((state:any) => state.currencies.results);
-
-  const newAllResult = allResults;
-
-
-
 
 
   const newListCurrencies = listCurrencies;
@@ -116,9 +110,6 @@ export const useCalculator = () => {
     const object = results;
 
 
-    console.log(`antes de cargar el from simbol`,results.currencieFromSimbol)
-    console.log(`antes de cargar el to simbol`,results.currencieToSimbol)
-
     let objectEdit = {
       amount: object.amount,
       from: object.to,
@@ -132,14 +123,18 @@ export const useCalculator = () => {
     }
 
       dispatch(setAllResults(objectEdit));
+      // dispatch(setRatesTo(obj))
+
+
+      dispatch(setRatesTo(object.currencieFromSimbol))
 
 
 
    
 
 
-    // dispatch(setRatesTo(value));
-    // dispatch(setResultsTo(object))
+
+
 
   }
 
