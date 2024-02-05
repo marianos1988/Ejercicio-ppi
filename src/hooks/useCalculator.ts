@@ -11,6 +11,7 @@ export const useCalculator = () => {
   const { listCurrencies } = useSelector((state:any) => state.currencies);
 
 
+
   const newListCurrencies = listCurrencies;
 
 
@@ -68,7 +69,7 @@ export const useCalculator = () => {
 
   const handleChangeSelectFrom = (value:string) => {
 
-  
+
       newListCurrencies.forEach((currencie:any) => {
 
         if(value === currencie.currencie) {
@@ -76,9 +77,11 @@ export const useCalculator = () => {
             currencie: currencie.currencie,
             name: currencie.properties.name
           }
+          //From
+          console.log(object.currencie)
+
           dispatch(setResultsFrom(object));
           dispatch(setCurrencieFromSimbol(object.currencie));
-
 
         }
       })
@@ -123,7 +126,7 @@ export const useCalculator = () => {
     }
 
       dispatch(setAllResults(objectEdit));
-      // dispatch(setRatesTo(obj))
+
 
 
       dispatch(setRatesTo(object.currencieFromSimbol))

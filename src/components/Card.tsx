@@ -9,9 +9,6 @@ import { SelectFieldFrom } from "./SelectFieldFrom"
 import { useCalculator } from "../hooks/useCalculator" 
 import { useSelector } from "react-redux"
 import { SelectFieldTo } from "./SelectFieldTo"
-import { setRatesTo } from "../reducers/CurrenciesRatesSlice"
-
-
 
 
 export const Card = () => {

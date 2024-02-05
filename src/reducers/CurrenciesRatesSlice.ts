@@ -134,7 +134,20 @@
         state.listCurrencies = action.payload;
       },
       setRatesFrom: (state,action) => {
+        //REvisar
+
         state.listRates.ratesFrom = action.payload;
+        const to = state.results.allResults.currencieToSimbol;
+        const rates:any = state.listRates.ratesFrom.rates;
+        rates.forEach((rate: { currencie: string; rate: number; })=>{
+
+          if(rate.currencie === to) {
+            state.results.allResults.totalTo = rate.rate;
+            state.results.allResults.total = state.results.allResults.amount * state.results.allResults.totalTo;
+          }
+        })
+
+        
       },
       setRatesTo: (state,action) =>{
         const rates:any = state.listRates.ratesFrom.rates;
